@@ -1,0 +1,22 @@
+{
+  "slug": "rolefit-studio",
+  "name": "RoleFit Studio",
+  "version": "1.0.0",
+  "tagline": "AI-native ATS resume & job-match studio: skill-gap scoring, live company intel, and grounded XYZ bullet tailoring.",
+  "description": "RoleFit Studio pairs a deterministic ATS skill-gap & XYZ-bullet diagnostic engine with Anna AI OS's Host LLM, live Web Search, and Persistent Storage so job seekers can tailor every application with zero API keys and zero hallucinated credentials.\n\n**Key Capabilities**\n\n- **Weighted ATS Match Scoring (0-100)**: Evaluates Hard Skills (45%), Must-Have vs Preferred JD Alignment (25%), Google XYZ Bullet Impact & Quantification (20%), and ATS Section/Seniority Readiness (10%).\n- **Evidence-Grounded XYZ Bullet Diffs**: Uses `anna.llm.complete` to upgrade passive or unquantified bullets into crisp XYZ-formula statements using explicit `[X%]` metric slots instead of inventing fake numbers, with 1-click Apply & instant re-scoring.\n- **Live Job URL Fetch & Company Intelligence**: Pulls live job postings via `anna.web.fetch` and researches product momentum, engineering culture, and smart reverse-interview questions via `anna.web.search`.\n- **Hiring Manager Outreach & Interview Prep**: Drafts concise `<110-word` cold DMs, cover hooks, and role-specific interview questions anchored to your real resume stories.\n- **Durable Application Tracker & ATS-Safe Export**: Saves your master resume and tailored role snapshots via Anna Persistent Storage (`anna.storage.*`), posts scorecard cards into Anna Chat (`anna.chat.append_artifact`), and exports parser-safe Markdown or plain text.",
+  "category": "productivity",
+  "logo_file": "bundle/app-icon-512.png",
+  "cover_url": "https://raw.githubusercontent.com/zwhy149/rolefit-studio/main/docs/assets/social-cover.png",
+  "screenshots": [
+    "https://raw.githubusercontent.com/zwhy149/rolefit-studio/main/docs/assets/app-desktop-en.png",
+    "https://raw.githubusercontent.com/zwhy149/rolefit-studio/main/docs/assets/app-bullets-en.png",
+    "https://raw.githubusercontent.com/zwhy149/rolefit-studio/main/docs/assets/app-mobile-en.png"
+  ],
+  "homepage_url": "https://github.com/zwhy149/rolefit-studio",
+  "support_url": "https://github.com/zwhy149/rolefit-studio/issues",
+  "privacy_url": "https://raw.githubusercontent.com/zwhy149/rolefit-studio/main/PRIVACY.md",
+  "bundled_executas": {
+    "rolefit-engine": { "path": "./executas/rolefit-engine" },
+    "rolefit-coach": { "path": "./executas/rolefit-coach" }
+  }
+}

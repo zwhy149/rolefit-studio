@@ -1,0 +1,50 @@
+{
+  "schema": 4,
+  "required_executas": [
+    {
+      "tool_id": "bundled:rolefit-engine",
+      "min_version": "1.0.0",
+      "version": "latest"
+    },
+    {
+      "tool_id": "bundled:rolefit-coach",
+      "version": "latest"
+    }
+  ],
+  "optional_executas": [],
+  "system_prompt_addendum": "The user has RoleFit Studio open. You are RoleFit Coach, an evidence-grounded ATS resume strategist and interview advisor. When the user provides a resume and job description (or asks to evaluate fit), call the bundled `rolefit-engine` Executa (`analyze_match`) to compute the exact deterministic ATS score, missing must-have skills, and XYZ bullet diagnostics, then summon or update the Studio window via `open_app_view` or `update_app_view` with `{ resumeText, jdText, roleTitle, company, analysis }`. Never fabricate candidate employers, degrees, or metrics; use explicit `[X%]` placeholders when a true number is needed.",
+  "user_message_prefix_template": "[RoleFit Studio] {user_message}",
+  "tags": ["productivity", "career", "resume", "ats", "job-search", "interview-prep"],
+  "ui": {
+    "bundle": {
+      "format": "static-spa",
+      "entry": "index.html",
+      "external_origins": []
+    },
+    "views": [
+      {
+        "name": "main",
+        "title": "RoleFit Studio",
+        "default": true,
+        "entry": "index.html",
+        "min_size": { "w": 360, "h": 520 },
+        "default_size": { "w": 1140, "h": 720 },
+        "max_size": { "w": 1920, "h": 1200 },
+        "resizable": true,
+        "movable": true,
+        "single_instance": true,
+        "summary_template": "RoleFit: {roleTitle}",
+        "icon": "app-icon.svg"
+      }
+    ],
+    "form_factors": ["desktop", "mobile"],
+    "browser_permissions": [],
+    "csp_overrides": {},
+    "state_merge": "last_writer_wins"
+  },
+  "dev": {
+    "fixtures": ["fixtures/*.jsonl"],
+    "seed_storage": {},
+    "user_id": 1
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "display_name": "RoleFit ATS & XYZ Resume Engine",
+  "version": "1.0.0",
+  "description": "Deterministic ATS skill-gap scoring, must-have vs nice-to-have JD parsing, Google XYZ formula resume bullet diagnostics, and parser-safe ATS export.",
+  "author": "zwhy149",
+  "homepage": "https://github.com/zwhy149/rolefit-studio",
+  "license": "MIT",
+  "tags": [
+    "productivity",
+    "career",
+    "ats",
+    "resume",
+    "job-search",
+    "anna-app"
+  ],
+  "tools": [
+    {
+      "name": "analyze_match",
+      "description": "Score a candidate resume against a target job description (0-100), returning weighted ATS sub-scores, matched/missing must-have and preferred skills, XYZ bullet audits, and priority actions.",
+      "parameters": [
+        {
+          "name": "resumeText",
+          "type": "string",
+          "description": "Full candidate resume in Markdown or plain text.",
+          "required": true
+        },
+        {
+          "name": "jdText",
+          "type": "string",
+          "description": "Full target job description text.",
+          "required": true
+        },
+        {
+          "name": "roleTitle",
+          "type": "string",
+          "description": "Optional override for target role title.",
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "company",
+          "type": "string",
+          "description": "Optional override for company name.",
+          "required": false,
+          "default": ""
+        }
+      ]
+    },
+    {
+      "name": "parse_job_posting",
+      "description": "Extract structured role metadata, compensation hints, required years of experience, must-have skills, and bonus skills from a raw job description.",
+      "parameters": [
+        {
+          "name": "jdText",
+          "type": "string",
+          "description": "Raw job posting text or scraped markdown.",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "audit_bullets",
+      "description": "Audit resume experience bullets against the Google XYZ formula (action verb, measurable metric, concise length, cliché check, and JD keyword alignment).",
+      "parameters": [
+        {
+          "name": "resumeOrBullets",
+          "type": "string",
+          "description": "Full resume text or newline-separated bullet list.",
+          "required": true
+        },
+        {
+          "name": "targetKeywords",
+          "type": "array",
+          "description": "Optional list of target JD skill strings to check alignment against.",
+          "required": false,
+          "default": []
+        }
+      ]
+    },
+    {
+      "name": "export_ats_resume",
+      "description": "Format a tailored resume into parser-safe plain text / Markdown, or compile a complete RoleFit ATS Match Scorecard Markdown report.",
+      "parameters": [
+        {
+          "name": "resumeText",
+          "type": "string",
+          "description": "Candidate resume text.",
+          "required": true
+        },
+        {
+          "name": "jdText",
+          "type": "string",
+          "description": "Optional job description text (when mode=\"scorecard\").",
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "mode",
+          "type": "string",
+          "description": "Export format: \"markdown\" | \"plain\" | \"scorecard\". Default: \"markdown\".",
+          "required": false,
+          "default": "markdown"
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "type": "node",
+    "min_version": "20.0.0",
+    "binary": {
+      "entrypoint": {
+        "default": "bin/rolefit-engine",
+        "windows-x86_64": "bin/rolefit-engine.cmd",
+        "windows-arm64": "bin/rolefit-engine.cmd"
+      },
+      "permissions": {
+        "bin/rolefit-engine": "0o755"
+      }
+    }
+  }
+}

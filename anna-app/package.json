@@ -1,0 +1,11 @@
+{
+  "name": "@rolefit/anna-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Anna AI OS App workspace for RoleFit Studio",
+  "scripts": {
+    "dev": "anna-app dev",
+    "validate": "anna-app validate --strict",
+    "push": "anna-app apps push"
+  }
+}

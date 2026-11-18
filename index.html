@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoleFit Studio — AI ATS Resume &amp; Job-Match Workbench</title>
+  <link rel="icon" type="image/svg+xml" href="./app-icon.svg" />
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-row">
+        <img class="brand-logo" src="./app-icon.svg" alt="RoleFit Studio" />
+        <div class="brand-text">
+          <h1>RoleFit Studio</h1>
+          <p id="brandSubtitle">AI-Native ATS Skill-Gap Scoring, Live Company Intel &amp; Grounded XYZ Bullet Tailoring</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <div class="runtime-pill" id="runtimePill">
+          <span class="dot"></span>
+          <span id="runtimeBadgeText">Local-First Mode</span>
+        </div>
+        <button type="button" class="btn" id="langToggleBtn" aria-label="Switch language">中文</button>
+        <button type="button" class="btn" id="themeToggleBtn" aria-label="Toggle theme">◐</button>
+      </div>
+    </header>
+
+    <div class="preset-bar">
+      <span class="preset-label" id="presetLabel">Quick Sample Roles:</span>
+      <div id="presetButtons" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+    </div>
+
+    <div id="statusToast" class="status-toast hidden" role="status" aria-live="polite"></div>
+
+    <main class="workspace-grid">
+      <section class="panel" aria-labelledby="inputsPanelTitle">
+        <div class="panel-header">
+          <h2 class="panel-title" id="inputsPanelTitle">Resume &amp; Target Job Posting</h2>
+          <div>
+            <input type="file" id="resumeFileInput" class="file-input-hidden" accept=".md,.txt,.markdown,text/plain" />
+            <button type="button" class="btn btn-soft" id="uploadResumeBtn">Import .md/.txt</button>
+          </div>
+        </div>
+
+        <div class="input-stack">
+          <div class="meta-row">
+            <div class="field-group">
+              <label class="field-label" for="roleTitleInput" id="roleTitleLabel">Target Role Title</label>
+              <input type="text" id="roleTitleInput" class="text-input" placeholder="e.g. Senior Full-Stack Engineer" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="companyNameInput" id="companyNameLabel">Company Name</label>
+              <input type="text" id="companyNameInput" class="text-input" placeholder="e.g. Linear / Stripe" />
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="jdInput" id="jdFieldLabel">Job Description (Paste text or fetch URL via Anna Web)</label>
+            <div class="url-fetch-row">
+              <input type="url" id="jobUrlInput" class="text-input" placeholder="https://boards.greenhouse.io/... (Anna Web Fetch)" />
+              <button type="button" class="btn" id="fetchUrlBtn">Fetch URL</button>
+            </div>
+            <textarea id="jdInput" class="textarea-input" spellcheck="false" placeholder="Paste the full Job Description here..."></textarea>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="resumeInput" id="resumeFieldLabel">Your Master Resume (Markdown or Plain Text)</label>
+            <textarea id="resumeInput" class="textarea-input resume-box" spellcheck="false" placeholder="Paste your Markdown or plain-text resume here..."></textarea>
+          </div>
+
+          <div class="cta-bar">
+            <button type="button" class="btn btn-primary" id="runAnalyzeBtn">Analyze Match &amp; AI Tailor</button>
+            <button type="button" class="btn" id="saveAppBtn">Save to Tracker</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Analysis Workbench">
+        <nav class="tabs-nav" role="tablist">
+          <button type="button" class="tab-btn active" id="tabBtnMatch" role="tab">Match &amp; Skills</button>
+          <button type="button" class="tab-btn" id="tabBtnBullets" role="tab">XYZ Bullet Diffs</button>
+          <button type="button" class="tab-btn" id="tabBtnIntel" role="tab">Company Intel</button>
+          <button type="button" class="tab-btn" id="tabBtnPrep" role="tab">Outreach &amp; Interview</button>
+          <button type="button" class="tab-btn" id="tabBtnExport" role="tab">Tracker &amp; Export</button>
+        </nav>
+        <div id="tabBody"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

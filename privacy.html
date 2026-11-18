@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — RoleFit Studio</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 720px; margin: 48px auto; padding: 0 20px; line-height: 1.65; color: #0f172a; }
+    h1, h2 { color: #0f172a; }
+    code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Privacy Policy — RoleFit Studio</h1>
+  <p><strong>Last updated:</strong> November 2026</p>
+  <p>RoleFit Studio is an open-source, privacy-first ATS resume and job-match workspace maintained at <a href="https://github.com/zwhy149/rolefit-studio">github.com/zwhy149/rolefit-studio</a>.</p>
+  <h2>1. Standalone Web Mode</h2>
+  <p>When used directly in a web browser outside Anna AI OS, all resume parsing, ATS skill-gap scoring, and bullet diagnostics execute 100% locally in your browser. Saved drafts are stored only in your browser's <code>localStorage</code> and are never transmitted to any developer-operated server.</p>
+  <h2>2. Anna AI OS App Mode</h2>
+  <p>When installed inside Anna AI OS, RoleFit Studio uses Anna's official Host APIs on your behalf:</p>
+  <ul>
+    <li><code>anna.storage.*</code> (Anna Persistent Storage, app-scoped) to save your master resume and tracked job analyses under your own Anna account.</li>
+    <li><code>anna.llm.complete</code> to generate grounded bullet rewrites, hiring-bar summaries, outreach notes, and interview prep using your chosen Anna model.</li>
+    <li><code>anna.web.search</code> and <code>anna.web.fetch</code> only when you explicitly fetch a job URL or run Live Company Intel.</li>
+  </ul>
+  <p>The developer of RoleFit Studio operates no external telemetry, analytics, ad trackers, or third-party databases.</p>
+  <h2>3. Contact</h2>
+  <p>Questions or issues can be reported via <a href="https://github.com/zwhy149/rolefit-studio/issues">GitHub Issues</a>.</p>
+</body>
+</html>
