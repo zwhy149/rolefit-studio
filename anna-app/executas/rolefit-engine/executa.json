@@ -4,7 +4,7 @@
   "enabled": true,
   "slug": "rolefit-engine",
   "name": "RoleFit ATS & XYZ Resume Engine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "executa_type": "tool",
   "description": "Deterministic ATS skill-gap scoring, must-have vs nice-to-have JD parsing, Google XYZ formula resume bullet diagnostics, and parser-safe ATS export.",
   "command": ["node", "rolefit_engine_plugin.js"],

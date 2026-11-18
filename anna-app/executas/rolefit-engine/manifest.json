@@ -1,6 +1,6 @@
 {
   "display_name": "RoleFit ATS & XYZ Resume Engine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Deterministic ATS skill-gap scoring, must-have vs nice-to-have JD parsing, Google XYZ formula resume bullet diagnostics, and parser-safe ATS export.",
   "author": "zwhy149",
   "homepage": "https://github.com/zwhy149/rolefit-studio",
