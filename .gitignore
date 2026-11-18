@@ -1,6 +1,6 @@
 node_modules/
 dist/
-anna-app/.anna/
+**/.anna/
 anna-app/bundle/
 anna-app/executas/rolefit-engine/dist/
 anna-app/executas/rolefit-engine/vendor/
