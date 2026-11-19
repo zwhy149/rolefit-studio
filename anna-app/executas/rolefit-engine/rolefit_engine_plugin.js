@@ -16,12 +16,15 @@ import {
 } from './vendor/core/index.js';
 
 const MANIFEST = {
+  name: 'rolefit-engine',
   display_name: 'RoleFit ATS & XYZ Resume Engine',
-  version: '1.0.1',
+  version: '1.0.5',
   description:
     'Deterministic ATS skill-gap scoring, must-have vs nice-to-have JD parsing, Google XYZ formula resume bullet diagnostics, and parser-safe ATS export.',
   author: 'zwhy149',
   homepage: 'https://github.com/zwhy149/rolefit-studio',
+  icon: '💼',
+  category: 'productivity',
   license: 'MIT',
   tags: ['productivity', 'career', 'ats', 'resume', 'job-search', 'anna-app'],
   tools: [
@@ -57,6 +60,8 @@ const MANIFEST = {
           default: '',
         },
       ],
+      timeout: 60,
+      streaming: false,
     },
     {
       name: 'parse_job_posting',
@@ -70,11 +75,13 @@ const MANIFEST = {
           required: true,
         },
       ],
+      timeout: 60,
+      streaming: false,
     },
     {
       name: 'audit_bullets',
       description:
-        'Audit resume experience bullets against the Google XYZ formula (action verb, measurable metric, concise length, cliché check, and JD keyword alignment).',
+        'Audit resume experience bullets against the Google XYZ formula (action verb, measurable metric, concise length, cliche check, and JD keyword alignment).',
       parameters: [
         {
           name: 'resumeOrBullets',
@@ -90,6 +97,8 @@ const MANIFEST = {
           default: [],
         },
       ],
+      timeout: 60,
+      streaming: false,
     },
     {
       name: 'export_ats_resume',
@@ -117,21 +126,13 @@ const MANIFEST = {
           default: 'markdown',
         },
       ],
+      timeout: 60,
+      streaming: false,
     },
   ],
   runtime: {
     type: 'node',
-    min_version: '20.0.0',
-    binary: {
-      entrypoint: {
-        default: 'bin/rolefit-engine',
-        'windows-x86_64': 'bin/rolefit-engine.cmd',
-        'windows-arm64': 'bin/rolefit-engine.cmd',
-      },
-      permissions: {
-        'bin/rolefit-engine': '0o755',
-      },
-    },
+    min_version: '18.0.0',
   },
 };
 
@@ -214,13 +215,19 @@ async function handleInvoke(params) {
   }
 }
 
+const METHOD_DISPATCH = {
+  describe: async () => MANIFEST,
+  invoke: handleInvoke,
+  health: async () => ({ status: 'ok', version: MANIFEST.version }),
+};
+
 function send(msg) {
   process.stdout.write(`${JSON.stringify(msg)}\n`);
 }
 
 function main() {
-  process.stderr.write(`[rolefit-engine] ${MANIFEST.display_name} v${MANIFEST.version} ready\n`);
-  const rl = readline.createInterface({ input: process.stdin });
+  process.stderr.write(`[rolefit-engine] ${MANIFEST.display_name} v${MANIFEST.version} ready (node)\n`);
+  const rl = readline.createInterface({ input: process.stdin, crlfDelay: Infinity });
 
   rl.on('line', async (raw) => {
     const line = raw.trim();
@@ -233,49 +240,20 @@ function main() {
       return;
     }
 
-    // Ignore reverse-RPC responses if any arrive
-    if (req.method === undefined && ('result' in req || 'error' in req)) {
-      return;
-    }
-
     const reqId = req.id;
     const method = req.method;
     const params = req.params || {};
-
-    try {
-      if (method === 'initialize') {
-        send({
-          jsonrpc: '2.0',
-          id: reqId,
-          result: {
-            protocolVersion: params.protocolVersion || '2.0',
-            capabilities: {},
-            serverInfo: { name: 'rolefit-engine', version: MANIFEST.version },
-          },
-        });
-        return;
-      }
-      if (method === 'describe') {
-        send({ jsonrpc: '2.0', id: reqId, result: MANIFEST });
-        return;
-      }
-      if (method === 'health') {
-        send({ jsonrpc: '2.0', id: reqId, result: { status: 'ok', version: MANIFEST.version } });
-        return;
-      }
-      if (method === 'invoke') {
-        const result = await handleInvoke(params);
-        send({ jsonrpc: '2.0', id: reqId, result });
-        return;
-      }
-      if (method === 'shutdown') {
-        send({ jsonrpc: '2.0', id: reqId, result: { ok: true } });
-        setTimeout(() => process.exit(0), 20);
-        return;
-      }
+    const handler = METHOD_DISPATCH[method];
+    if (!handler) {
       if (reqId !== undefined) {
         send({ jsonrpc: '2.0', id: reqId, error: { code: -32601, message: `method not found: ${method}` } });
       }
+      return;
+    }
+
+    try {
+      const result = await handler(params);
+      send({ jsonrpc: '2.0', id: reqId, result });
     } catch (err) {
       if (reqId !== undefined) {
         send({ jsonrpc: '2.0', id: reqId, error: { code: -32000, message: err.message || String(err) } });

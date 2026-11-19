@@ -1,6 +1,6 @@
 {
   "name": "rolefit-studio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AI-native ATS resume & job-match studio with deterministic skill-gap scoring, Google XYZ bullet diagnostics, live company intel, and Anna AI OS integration.",
   "type": "module",
   "license": "MIT",

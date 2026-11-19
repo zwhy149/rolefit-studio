@@ -1,9 +1,12 @@
 {
+  "name": "rolefit-engine",
   "display_name": "RoleFit ATS & XYZ Resume Engine",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "Deterministic ATS skill-gap scoring, must-have vs nice-to-have JD parsing, Google XYZ formula resume bullet diagnostics, and parser-safe ATS export.",
   "author": "zwhy149",
   "homepage": "https://github.com/zwhy149/rolefit-studio",
+  "icon": "💼",
+  "category": "productivity",
   "license": "MIT",
   "tags": [
     "productivity",
@@ -44,7 +47,9 @@
           "required": false,
           "default": ""
         }
-      ]
+      ],
+      "timeout": 60,
+      "streaming": false
     },
     {
       "name": "parse_job_posting",
@@ -56,11 +61,13 @@
           "description": "Raw job posting text or scraped markdown.",
           "required": true
         }
-      ]
+      ],
+      "timeout": 60,
+      "streaming": false
     },
     {
       "name": "audit_bullets",
-      "description": "Audit resume experience bullets against the Google XYZ formula (action verb, measurable metric, concise length, cliché check, and JD keyword alignment).",
+      "description": "Audit resume experience bullets against the Google XYZ formula (action verb, measurable metric, concise length, cliche check, and JD keyword alignment).",
       "parameters": [
         {
           "name": "resumeOrBullets",
@@ -75,7 +82,9 @@
           "required": false,
           "default": []
         }
-      ]
+      ],
+      "timeout": 60,
+      "streaming": false
     },
     {
       "name": "export_ats_resume",
@@ -101,21 +110,13 @@
           "required": false,
           "default": "markdown"
         }
-      ]
+      ],
+      "timeout": 60,
+      "streaming": false
     }
   ],
   "runtime": {
     "type": "node",
-    "min_version": "20.0.0",
-    "binary": {
-      "entrypoint": {
-        "default": "bin/rolefit-engine",
-        "windows-x86_64": "bin/rolefit-engine.cmd",
-        "windows-arm64": "bin/rolefit-engine.cmd"
-      },
-      "permissions": {
-        "bin/rolefit-engine": "0o755"
-      }
-    }
+    "min_version": "18.0.0"
   }
 }

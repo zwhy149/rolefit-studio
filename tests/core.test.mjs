@@ -84,7 +84,7 @@ test('exportAtsResume and buildScorecardMarkdown produce clean outputs', () => {
   assert.ok(card.includes('Strong PLG candidate.'));
 });
 
-test('rolefit-engine Executa plugin handles initialize, describe, health, and invoke over stdio JSON-RPC', () => {
+test('rolefit-engine Executa plugin handles describe, health, and invoke over stdio JSON-RPC (with v1 initialize fallback)', () => {
   const pluginPath = join(root, 'anna-app', 'executas', 'rolefit-engine', 'rolefit_engine_plugin.js');
   const scenario = PRESET_SCENARIOS[0];
   const lines = [
@@ -117,8 +117,9 @@ test('rolefit-engine Executa plugin handles initialize, describe, health, and in
     .map((l) => JSON.parse(l));
 
   assert.equal(responses.length, 4);
-  assert.equal(responses[0].result.serverInfo.name, 'rolefit-engine');
+  assert.equal(responses[0].error.code, -32601);
   assert.equal(responses[1].result.tools.length, 4);
+  assert.equal(responses[1].result.name, 'rolefit-engine');
   assert.equal(responses[2].result.status, 'ok');
   assert.equal(responses[3].result.success, true);
   assert.ok(responses[3].result.data.matchScore > 40);

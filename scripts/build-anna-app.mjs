@@ -55,7 +55,7 @@ function buildTarGz(entries) {
     header.write('0000000\0', 108, 'ascii');
     header.write('0000000\0', 116, 'ascii');
     header.write(`${data.length.toString(8).padStart(11, '0')}\0`, 124, 'ascii');
-    header.write(`${Math.floor(Date.now() / 1000).toString(8).padStart(11, '0')}\0`, 136, 'ascii');
+    header.write('00000000000\0', 136, 'ascii');
     header.fill(0x20, 148, 156);
     header.write('0', 156, 'ascii');
     header.write('ustar\0', 257, 'ascii');

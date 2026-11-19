@@ -3,7 +3,7 @@
   "required_executas": [
     {
       "tool_id": "bundled:rolefit-engine",
-      "min_version": "1.0.0",
+      "min_version": "1.0.5",
       "version": "latest"
     },
     {

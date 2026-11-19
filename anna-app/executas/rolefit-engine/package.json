@@ -1,10 +1,13 @@
 {
   "name": "rolefit-engine",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "private": true,
   "type": "module",
   "description": "Anna AI OS stdio Executa tool plugin for RoleFit Studio",
   "main": "rolefit_engine_plugin.js",
+  "scripts": {
+    "start": "node rolefit_engine_plugin.js"
+  },
   "bin": {
     "rolefit-engine": "./rolefit_engine_plugin.js"
   },
